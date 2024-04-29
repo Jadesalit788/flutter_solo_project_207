@@ -61,10 +61,7 @@ class _homeState extends State<home> {
                   width: 30,
                   height: 30,
                 ),
-                
-                onTap: (
-              
-                ) {
+                onTap: () {
                   Scaffold.of(context).openDrawer();
                 },
               );
@@ -80,7 +77,7 @@ class _homeState extends State<home> {
         ),
         
         drawer: myDrawer() ,
-        backgroundColor: Color.fromRGBO(180, 180, 184, 1),
+        backgroundColor: Color.fromRGBO(224, 224, 226, 1),
         body: Builder(
           builder: (context) {
             return GestureDetector(
@@ -135,7 +132,8 @@ class _homeState extends State<home> {
                           borderRadius: BorderRadius.circular(25)
                         ),
                         child:Column(
-                          children: [Padding(
+                          children: [
+                          Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                             child: (
@@ -149,18 +147,11 @@ class _homeState extends State<home> {
                             ),
                           ),
                         ),
-                        
                         ],
                         )
-                         
-
-    
-                        
                       ),
                     ),
-                    
                   ),
-                  
                   clockWid(),
                 ],
               ),
