@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => NoteData(),
       builder: ((context, child) => const MaterialApp(
-          debugShowCheckedModeBanner: false, home: noteTest())),
+          debugShowCheckedModeBanner: false, home: home(title: 'Home',))),
     );
   }
 }
