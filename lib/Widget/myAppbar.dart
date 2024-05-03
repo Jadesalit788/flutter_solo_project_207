@@ -2,32 +2,37 @@ import 'package:flutter/material.dart';
 
 class myAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-
-  const myAppbar({required this.title});
+  const myAppbar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      leading: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Builder(
+          builder: (context) {
+            return GestureDetector(
+              child: Image.asset(
+                'assets/logo1.png',
+                width: 30,
+                height: 30,
+              ),
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
+      ),
+      title: Text(this.title),
+      titleTextStyle: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 23,
+        color: Colors.black,
+      ),
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
-}
-
-class user extends StatefulWidget {
-  const user({Key? key}) : super(key: key);
-
-  @override
-  State<user> createState() => _userState();
-}
-
-class _userState extends State<user> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: myAppbar(title: 'sss'),
-    );
-  }
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

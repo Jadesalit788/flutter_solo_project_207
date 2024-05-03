@@ -15,7 +15,6 @@ class noteTest extends StatefulWidget {
 
 class _noteTestState extends State<noteTest> {
   late TextEditingController controller;
-  String name = 'Jadesalit';
 
   @override
   void initState() {
@@ -92,43 +91,6 @@ class _noteTestState extends State<noteTest> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //header
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      child: Text(
-                        'Hello,\n$name',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 10),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(25),
-                      child: Container(
-                          child: ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black,
-                              ),
-                              onPressed: () async {
-                                final name = await changeName();
-                                if (name == null || name.isEmpty) return;
-
-                                setState(() => this.name = name);
-                              },
-                              icon: Icon(
-                                Icons.edit,
-                                color: Colors.white,
-                              ),
-                              label: Text(''))),
-                    )
-                  ],
-                ),
-              ),
               //listview of Note
               value.getAllNotes().length == 0
                   ? Padding(

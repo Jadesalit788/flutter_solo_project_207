@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:mixbox/page/credit.dart';
+import 'package:mixbox/page/notepage.dart';
+import 'package:mixbox/select.dart';
 import 'package:mixbox/theme.dart';
 
 class MySquare extends StatelessWidget {
@@ -32,44 +35,55 @@ class myDrawer extends StatelessWidget {
         color: Colors.white,
         child: ListView(
           padding: EdgeInsets.zero,
-              children: <Widget>[
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                  ),
-                  child: SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: Center(
-                      child: Text(
-                        'MEMO',
-                        style: GoogleFonts.kanit(
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.black,
+              ),
+              child: SizedBox(
+                height: 50,
+                width: double.infinity,
+                child: Center(
+                  child: Text('MEMO',
+                      style: GoogleFonts.kanit(
                           textStyle: h1.merge(TextStyle(
-                            color: Colors.white,
-                          ))
-                        )
-                      ),
-                    ),
-                  ),
+                        color: Colors.white,
+                      )))),
                 ),
-                ListTile(
-                  title: Text('Item 1'),
-                  onTap: () {
-                    // Handle item 1 tap
-                  },
-                ),
-                ListTile(
-                  title: Text('Item 2'),
-                  onTap: () {
-                    // Handle item 2 tap
-                  },
-                ),
-                // Add more ListTiles for additional menu items
-              ],
+              ),
             ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                // Handle item 1 tap
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => home(
+                              title: 'Home',
+                            )));
+              },
+            ),
+            ListTile(
+              title: Text('Note'),
+              onTap: () {
+                // Handle item 2 tap
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => noteTest()));
+              },
+            ),
+            ListTile(
+              title: Text('Credit'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CreditPage()));
+                // Handle item 3 tap
+              },
+            ),
+            // Add more ListTiles for additional menu items
+          ],
+        ),
       ),
     );
   }
 }
-
-

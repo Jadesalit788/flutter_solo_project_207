@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mixbox/Widget/drawer.dart';
-import 'package:mixbox/page/form.dart';
+
 import 'page/notepage.dart';
 import 'theme.dart';
 import 'package:intl/intl.dart';
@@ -35,13 +35,17 @@ class home extends StatefulWidget {
 
 class _homeState extends State<home> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  String name = 'Jadesalit';
   //current time
   DateTime currentTime = DateTime.now();
   //String time
   @override
   void initState() {
     super.initState();
+    controller = TextEditingController();
   }
+
+  late TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -89,42 +93,47 @@ class _homeState extends State<home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        height: 200,
-                        width: 250,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-                          child: Text.rich(
-                            TextSpan(
-                                text: 'Hi, ',
-                                style: GoogleFonts.kanit(textStyle: h1),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: '\nJadesalit',
-                                      style: GoogleFonts.kanit(textStyle: h1))
-                                ]),
+                          height: 200,
+                          width: 250,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        ),
-                      ),
-                      Container(
-                        child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => user()));
-                            },
-                            icon: Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                            ),
-                            label: Text('')),
-                      )
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                child: Text(
+                                  'Hello,\n$name',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 10),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(25),
+                                child: Container(
+                                    child: ElevatedButton.icon(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.black,
+                                        ),
+                                        onPressed: () async {
+                                          final name =
+                                              await changeName(context);
+                                          if (name == null || name.isEmpty)
+                                            return;
+
+                                          setState(() => this.name = name);
+                                        },
+                                        icon: Icon(
+                                          Icons.edit,
+                                          color: Colors.white,
+                                        ),
+                                        label: Text(''))),
+                              )
+                            ],
+                          )),
                     ],
                   ),
                 ),
@@ -170,5 +179,25 @@ class _homeState extends State<home> {
             ),
           );
         }));
+  }
+
+  Future<String?> changeName(BuildContext context) => showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+            content: TextField(
+              autofocus: true, //auto keyboard
+              decoration: InputDecoration(
+                  hintText: 'Enter your name', hoverColor: Colors.black),
+              controller: controller,
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () => submit(context), // Pass context here
+                  child: Text('Submit'))
+            ],
+          ));
+
+  void submit(BuildContext context) {
+    Navigator.of(context).pop(controller.text);
   }
 }
